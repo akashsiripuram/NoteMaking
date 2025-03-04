@@ -5,12 +5,13 @@ import Login from './pages/Auth/Login'
 import AllNotes from './pages/Notes/AllNotes'
 import NoteForm from './pages/Notes/NoteForm'
 import Signup from './pages/Auth/Signup'
-
+import toast, { Toaster } from 'react-hot-toast';
 function App() {
   
 
   return (
     <>
+    <Toaster />
       <Routes>
         <Route path="/" element={<HomeLayout/>}>
           <Route path='allnotes' element={<AllNotes/>}/>
