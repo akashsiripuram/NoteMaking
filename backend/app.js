@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose=require("mongoose");
 const router = require("./routes/user.route");
-const cors = require("cors")
+const cors = require("cors");
+const verifyToken = require("./middleware/verifyToken");
 const app = express();
 app.use(cors())
 app.use(express.json())
@@ -22,7 +23,10 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
+app.get("/protected-route",verifyToken,(req,res)=>{
+  console.log(req.user);
+  res.send("This is a protected route")
+})
 
 app.listen(5000, () => {
   console.log("listening to a port of 5000");
