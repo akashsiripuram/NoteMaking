@@ -1,15 +1,35 @@
 import { useState } from "react";
-
+import toast from "react-hot-toast";
+import axios from "axios";
 export default function NoteForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
-  const handleSubmit = (e) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     console.log(title);
     console.log(content);
-    setTitle("");
-    setContent("");
+
+    const response = await axios.post(
+      "http://localhost:5000/api/note/create-note",
+      {
+        title: title,
+        content: content,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    if (response.data.success) {
+      toast.success("note created successfully.");
+    } else {
+      toast.error("something went wrong!");
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -43,12 +63,26 @@ export default function NoteForm() {
               placeholder="Enter content"
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white p-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
-          >
-            Add Note
-          </button>
+          {isLoading ? (
+            <>
+              <button
+                disabled={true}
+                type="submit"
+                className="w-full bg-gray-600 text-white p-3 rounded-md font-semibold hover:bg-gray-700 transition duration-300"
+              >
+                Add Note
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white p-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
+              >
+                Add Note
+              </button>
+            </>
+          )}
         </form>
       </div>
     </div>
