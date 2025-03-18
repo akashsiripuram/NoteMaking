@@ -4,12 +4,17 @@ import axios from "axios";
 export default function NoteForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = async (e) => {
     setIsLoading(true);
+    console.log("Hello Jii")
     e.preventDefault();
     console.log(title);
     console.log(content);
+    let token;
+    if (typeof window!=="undefined") {
+      token = localStorage.getItem("token");
+    }
 
     const response = await axios.post(
       "http://localhost:5000/api/note/create-note",
@@ -19,10 +24,11 @@ export default function NoteForm() {
       },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
+    console.log("Helo from noteform",response);
 
     if (response.data.success) {
       toast.success("note created successfully.");

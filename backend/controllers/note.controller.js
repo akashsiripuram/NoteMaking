@@ -42,7 +42,62 @@ const getNotes = async (req,res) => {
         })
     }
 }
+const updateNotes= async(req,res)=>{
+  const {id}=req.params;
+  const {title,content}=req.body;
+  try{
+
+    const notes=await Notes.findById(id);
+    console.log(notes);
+    if(!notes){
+      return res.status(404).json({
+        success:false,
+        message:"note not found"
+      })
+    }
+    
+    notes.title=title;
+    notes.content=content;
+    await notes.save();
+    return res.status(200).json({
+      success:true,
+      message:"note updated successfully"
+    })
+     
+
+  }catch(err){
+    return res.status(500).json({
+      success:false,
+      message:"server error"
+    })
+  }
+}
+const deleteNote=async(req,res)=>{
+  const {id}=req.params;
+  try{
+    const notes=await Notes.findById(id);
+    console.log(notes);
+    if(!notes){
+      return res.status(404).json({
+        success:false,
+        message:"note not found"
+      })
+    }
+    await Notes.deleteOne({_id:id});
+    return res.status(200).json({
+      success:true,
+      message:"note deleted successfully"
+    })
+  }catch(err){
+    return res.status(500).json({
+      success:false,
+      message:"server error"
+    })
+  }
+}
 module.exports = {
   createNote,
-  getNotes
+  getNotes,
+  updateNotes,
+  deleteNote,
 };
