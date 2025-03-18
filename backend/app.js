@@ -6,7 +6,7 @@ const noteRouter = require("./routes/note.route")
 const cors = require("cors");
 const verifyToken = require("./middleware/verifyToken");
 const app = express();
-app.use(cors())
+app.use(cors({origin:"https://note-making-backend.vercel.app",credentials:true}))
 app.use(express.json())
 
 app.use("/api",router);
