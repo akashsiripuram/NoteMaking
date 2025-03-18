@@ -51,7 +51,7 @@ npm install
 ### 3. **Set up environment variables**  
 Create a `.env` file in the backend directory with the following values:  
 ```env  
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/notemaking  
+MONGO_URI="your_db_uri" 
 JWT_SECRET=your_jwt_secret  
 PORT=5000  
 ```
@@ -66,7 +66,7 @@ npm start
 #### Frontend  
 ```bash  
 cd frontend  
-npm start  
+npm run dev
 ```
 
 
