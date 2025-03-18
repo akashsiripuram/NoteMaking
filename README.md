@@ -69,7 +69,6 @@ cd frontend
 npm run dev
 ```
 
-
 ---
 
 ## 📂 Folder Structure  
@@ -109,6 +108,10 @@ npm run dev
 
 ## 🙌 Contributing  
 Feel free to contribute by creating a pull request! Make sure to follow the coding guidelines and provide detailed commit messages.  
+
+### Contributors
+- **Akash Siripuram**
+- **Suraj719**
 
 ---
 
