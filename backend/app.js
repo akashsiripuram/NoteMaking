@@ -12,10 +12,9 @@ app.use(express.json())
 app.use("/api",router);
 app.use("/api/note",noteRouter)
 
-// app.use("/",(req,res)=>{
-//   const body = req.body
-//   res.send(req.body.name)
-// })
+app.get("/",(req,res)=>{
+  res.send("Hello World")
+})
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -25,10 +24,7 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-app.get("/protected-route",verifyToken,(req,res)=>{
-  console.log(req.user);
-  res.send("This is a protected route")
-})
+
 
 app.listen(5000, () => {
   console.log("listening to a port of 5000");

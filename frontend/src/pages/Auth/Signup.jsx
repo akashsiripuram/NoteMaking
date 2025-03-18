@@ -9,7 +9,7 @@ export default function Signup() {
   async function createAccount(e) {
     e.preventDefault();
     try {
-      const data = await axios.post("http://localhost:5000/api/signup", {
+      const data = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/signup`, {
         username,
         email,
         password,

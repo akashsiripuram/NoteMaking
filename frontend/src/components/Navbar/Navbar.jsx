@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   const [user, setUser] = useState(null);
   const getUser = async () => {
-    const response = await axios.get("http://localhost:5000/api/get-user", {
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/get-user`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

@@ -5,10 +5,11 @@ import Login from "./pages/Auth/Login";
 import AllNotes from "./pages/Notes/AllNotes";
 import NoteForm from "./pages/Notes/NoteForm";
 import Signup from "./pages/Auth/Signup";
-import toast, { Toaster } from "react-hot-toast";
+import  { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import axios from "axios";
 function App() {
+  // eslint-disable-next-line react/prop-types
   const PrivateRoute = ({ children }) => {
     // const isAuthenticated = localStorage.getItem("token");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -21,7 +22,7 @@ function App() {
       setIsLoading(true);
       console.log("before call");
       try {
-        const response = await axios.get("http://localhost:5000/api/get-user", {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/get-user`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -32,8 +33,8 @@ function App() {
         } else {
           setIsAuthenticated(false);
         }
-      } catch (error) {
-       
+      } catch (er) {
+       console.log(er);
         setIsAuthenticated(false);
       }
       finally{

@@ -23,7 +23,7 @@ export default function AllNotes() {
   const fetchNotes = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      "http://localhost:5000/api/note/get-notes",
+      `${import.meta.env.VITE_BACKEND_URL}/api/note/get-notes`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ export default function AllNotes() {
 
  
   const getUser = async () => {
-    const response = await axios.get("http://localhost:5000/api/get-user", {
+    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/get-user`, {
       headers: {
         
         Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ export default function AllNotes() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const respose=await axios.post("http://localhost:5000/api/note/update/"+formData.id,formData,{
+        const respose=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/note/update/`+formData.id,formData,{
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -102,7 +102,7 @@ export default function AllNotes() {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/note/delete-note/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/note/delete-note/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

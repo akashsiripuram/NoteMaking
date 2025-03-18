@@ -17,7 +17,7 @@ export default function NoteForm() {
     }
 
     const response = await axios.post(
-      "http://localhost:5000/api/note/create-note",
+      `${import.meta.env.VITE_BACKEND_URL}/api/note/create-note`,
       {
         title: title,
         content: content,

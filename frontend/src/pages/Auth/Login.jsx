@@ -10,7 +10,7 @@ export default function Login() {
 
   async function LoginUser(e) {
     e.preventDefault();
-    const res = await axios.post("http://localhost:5000/api/login", {
+    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
       username,
       password,
     });
